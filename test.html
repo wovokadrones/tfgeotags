@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leaflet Map with Markers</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    // Initialize the map centered on the Philippines
+    var map = L.map('map').setView([12.8797, 121.7740], 7);
+
+    // Add the map tiles (you can replace 'YOUR_ACCESS_TOKEN' with your own access token if you have one)
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+    // Sample locations with points
+// Sample locations with points
+var locations = [
+  { name: "Point 1", lat: 14.179456, lng: 122.442941 },
+  { name: "Point 2", lat: 14.188747, lng: 122.450345 },
+  { name: "Point 3", lat: 14.179801, lng: 122.442984 },
+  { name: "Point 4", lat: 14.179792, lng: 122.442988 },
+  { name: "Point 5", lat: 14.184385, lng: 122.447247 },
+  { name: "Point 6", lat: 14.184398, lng: 122.447285 },
+  { name: "Point 7", lat: 14.184397, lng: 122.447284 },
+  { name: "Point 8", lat: 13.97328, lng: 122.973688 },
+  { name: "Point 9", lat: 13.970412, lng: 122.977 },
+  { name: "Point 10", lat: 13.970419, lng: 122.976994 },
+  { name: "Point 12", lat: 13.967371, lng: 122.978941 },
+  { name: "Point 13", lat: 13.963304, lng: 122.977917 },
+  { name: "Point 14", lat: 13.952889, lng: 122.984895 },
+  { name: "Point 15", lat: 14.009276, lng: 122.967778 },
+  { name: "Point 16", lat: 13.951291, lng: 122.985028 },
+  { name: "Point 17", lat: 13.951245, lng: 122.98503 },
+  { name: "Point 18", lat: 13.949118, lng: 122.98555 },
+  { name: "Point 19", lat: 13.949089, lng: 122.985545 },
+  { name: "Point 20", lat: 13.945863, lng: 122.985638 },
+  { name: "Point 21", lat: 13.945926, lng: 122.985535 },
+  { name: "Point 23", lat: 13.96285, lng: 122.983038 },
+  { name: "Point 25", lat: 13.957508, lng: 122.986684 },
+  { name: "Point 26", lat: 13.957501, lng: 122.986685 },
+  { name: "Point 28", lat: 13.966352, lng: 122.980756 }
+];
+
+
+
+
+    // Function to create a link to the image
+    function createImageLink(pointNo) {
+      var imgPath = `img/TF (${pointNo}).jpg`;
+      var imgLink = `<a href="${imgPath}" target="_blank">View Image ${pointNo}</a>`;
+      return imgLink;
+    }
+
+    // Add markers to the map
+    for (var i = 0; i < locations.length; i++) {
+      var marker = L.marker([locations[i].lat, locations[i].lng])
+        .bindPopup(createImageLink(i + 1))
+        .addTo(map);
+    }
+  </script>
+</body>
+</html>
